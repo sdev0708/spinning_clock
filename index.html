@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Webpage</title>
+</head>
+<body>
+    <div class="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="time">
+        <div class="timer">
+            <h1 class="clock"></h1>
+        </div>
+    </div>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Lobster&display=swap');
+        body
+        {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #240229;
+        }
+        .loader
+        {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            /*background: linear-gradient(#ffe96b, #ffe928, #fff);*/
+            /*background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);*/
+            background: linear-gradient(#f72585, #b5179e, #7209b7, #560bad, #480ca8, #3a0ca3, #3f37c9, #4361ee, #4895ef, #4cc9f0);
+            /*background: linear-gradient(#eae4e9, #fff1e6, #fde2e4, #fad2e1, #e2ece9, #bee1e6, #f0efeb, #dfe7fd, #cddafd);*/
+            /*background: linear-gradient(#590d22, #800f2f, #a4133c, #c9184a, #ff4d6d, #ff758f, #ff8fa3, #ffb3c1, #ffccd5, #fff0f3);*/
+            /*background: linear-gradient(#7400b8, #6930c3, #5e60ce, #5390d9, #4ea8de, #48bfe3, #56cfe1, #64dfdf, #72efdd, #80ffdb);*/
+            animation: spin_circle 0.5s linear infinite;
+        }
+        .loader span
+        {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            /*background: linear-gradient(#ffe96b, #ffe928, #fff);*/
+            /*background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);*/
+            background: linear-gradient(#f72585, #b5179e, #7209b7, #560bad, #480ca8, #3a0ca3, #3f37c9, #4361ee, #4895ef, #4cc9f0); /* top 1 */
+            /*background: linear-gradient(#eae4e9, #fff1e6, #fde2e4, #fad2e1, #e2ece9, #bee1e6, #f0efeb, #dfe7fd, #cddafd);*/
+            /*background: linear-gradient(#590d22, #800f2f, #a4133c, #c9184a, #ff4d6d, #ff758f, #ff8fa3, #ffb3c1, #ffccd5, #fff0f3);*/
+            /*background: linear-gradient(#7400b8, #6930c3, #5e60ce, #5390d9, #4ea8de, #48bfe3, #56cfe1, #64dfdf, #72efdd, #80ffdb);*/ /* top 2 */
+        }
+        .loader span:nth-child(1)
+        {
+            filter: blur(5px);
+        }
+        .loader span:nth-child(2)
+        {
+            filter: blur(10px);
+        }
+        .loader span:nth-child(3)
+        {
+            filter: blur(25px);
+        }
+        .loader span:nth-child(4)
+        {
+            filter: blur(50px);
+        }
+        .loader::after
+        {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-radius: 50%;
+            background: #240229;
+        }
+        @keyframes spin_circle
+        {           
+            0%
+            {
+                transform: rotate(0deg);
+            }
+            100%
+            {
+                transform: rotate(360deg);                
+            }
+        }
+        .clock
+        {
+            position: absolute;
+            font-family: 'Balsamiq Sans', cursive;
+            font-size: 35pt;
+            color: white;
+            top: 47%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script>
+        // 수정 사항
+        // 1. 24시 주기인 시계 바꾸기
+        // 2. 0시 0분 0초
+        var clock = document.querySelector('.clock')
+        function time(){
+            var now = new Date();
+            var h = now.getHours();
+            var m = now.getMinutes();
+            var s = now.getSeconds();
+            if(h >= 13){ // 24시 주기인 시계 바꾸는 조건문
+                var h = h - 12
+            }
+            var h = String(h)
+            var m = String(m)
+            var s = String(s)
+            if(h.length <= 1){
+                var h = 0 + h
+            }
+            if(m.length <= 1){
+                var m = 0 + m
+            }
+            if(s.length <= 1){
+                var s = 0 + s
+            }
+            clock.innerHTML = h + " : " + m + " : " + s
+        }
+        function clockInit(){
+            setInterval(time, 1000)
+        }
+        time()
+        clockInit()
+    </script>
+</body>
+</html>
